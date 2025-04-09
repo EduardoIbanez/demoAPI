@@ -17,11 +17,6 @@ public class RegisterController {
         this.createUserService = createUserService;
     }
 
-    @GetMapping ("/")
-    public String demo(){
-     return "endpoint de prueba";
-    }
-
     @PostMapping("/create")
     public UserResponseDTO createUser(@RequestBody UserRequestDTO user){
 
