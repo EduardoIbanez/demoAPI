@@ -22,7 +22,7 @@ public class RegisterController {
      return "endpoint de prueba";
     }
 
-    @PostMapping("create")
+    @PostMapping("/create")
     public UserResponseDTO createUser(@RequestBody UserRequestDTO user){
 
         return createUserService.createUser(user);

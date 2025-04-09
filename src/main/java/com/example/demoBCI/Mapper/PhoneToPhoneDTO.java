@@ -2,7 +2,9 @@ package com.example.demoBCI.Mapper;
 
 import com.example.demoBCI.DTO.Response.PhoneResponseDTO;
 import com.example.demoBCI.Entity.Phone;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PhoneToPhoneDTO implements IMapper<Phone, PhoneResponseDTO>{
     @Override
     public PhoneResponseDTO map(Phone in) {

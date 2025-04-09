@@ -14,5 +14,5 @@ public class Phone {
     public int number;
     public int cityCode;
     public int countryCode;
-    public User uuidUser;
+    public String uuidUser;
 }

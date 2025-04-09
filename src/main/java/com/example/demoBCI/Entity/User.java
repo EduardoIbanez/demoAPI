@@ -5,13 +5,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
 @Entity
 @Table(name = "User")
-public class User {
+public class User implements Serializable {
 
     @Id
     public final String uuid = UUID.randomUUID().toString();

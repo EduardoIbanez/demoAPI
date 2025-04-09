@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class PhoneRequestDTO {
     public int number;
-    public int cityCode;
-    public int countryCode;
+    public int citycode;
+    public int contrycode;
 }

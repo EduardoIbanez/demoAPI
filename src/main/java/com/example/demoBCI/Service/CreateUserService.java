@@ -35,9 +35,13 @@ public class CreateUserService {
     public UserResponseDTO createUser(UserRequestDTO userRequestDTO){
         User user = mapperUser.map(userRequestDTO);
         this.userRepository.save(user);
-        User userPhones = userRepository.findById(user.getUuid());
+        User userPhones = userRepository.findByUuid(user.getUuid());
         if(userPhones != null ){
-            IntStream.iterate(0, i -> userRequestDTO.getPhones().size() > 0, i -> i + 1).forEach(i -> createPhone(userPhones, userRequestDTO.getPhones().get(i)));
+            for(int i=0; i < userRequestDTO.getPhones().size(); i++){
+                createPhone(userPhones, userRequestDTO.getPhones().get(i));
+
+            }
+            //IntStream.iterate(0, i -> userRequestDTO.getPhones().size() > 0, i -> i + 1).forEach(i -> createPhone(userPhones, userRequestDTO.getPhones().get(i)));
 
         }
 
@@ -47,15 +51,15 @@ public class CreateUserService {
     private Phone createPhone(User user, PhoneRequestDTO phones){
         Phone phoneCreate = new Phone();
         phoneCreate.setNumber(phones.getNumber());
-        phoneCreate.setCityCode(phones.getCityCode());
-        phoneCreate.setCountryCode(phones.getCountryCode());
-        phoneCreate.setUuidUser(user);
+        phoneCreate.setCityCode(phones.getCitycode());
+        phoneCreate.setCountryCode(phones.getContrycode());
+        phoneCreate.setUuidUser(user.getUuid());
         return phoneRepository.save(phoneCreate);
     }
 
     private UserResponseDTO generateResponse(User user){
-        User getUser = userRepository.findById(user.getUuid());
-        List<Phone> phones  = phoneRepository.findByUser(user);
+        User getUser = userRepository.findByUuid(user.getUuid());
+        List<Phone> phones  = phoneRepository.findByUuidUser(user.getUuid());
 
         UserResponseDTO userResponse  = new UserResponseDTO();
         userResponse.setName(getUser.getName());
@@ -70,7 +74,7 @@ public class CreateUserService {
         userResponse.setPhones(converterPhones(phones));
 
 
-        return null;
+        return userResponse;
     }
     private List<PhoneResponseDTO> converterPhones(List<Phone> phones){
         List<PhoneResponseDTO> phonesResponseDTO = new ArrayList<>();
