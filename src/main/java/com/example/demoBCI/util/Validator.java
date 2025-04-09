@@ -1,4 +1,4 @@
-package com.example.demoBCI.Util;
+package com.example.demoBCI.util;
 
 import org.springframework.stereotype.Component;
 

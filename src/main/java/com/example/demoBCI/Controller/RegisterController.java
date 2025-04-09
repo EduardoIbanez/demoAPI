@@ -1,9 +1,8 @@
 package com.example.demoBCI.Controller;
 
-import com.example.demoBCI.DTO.Request.UserRequestDTO;
-import com.example.demoBCI.DTO.Response.UserResponseDTO;
-import com.example.demoBCI.Service.CreateUserService;
-import org.springframework.web.bind.annotation.GetMapping;
+import com.example.demoBCI.dto.request.UserRequestDTO;
+import com.example.demoBCI.dto.response.UserResponseDTO;
+import com.example.demoBCI.service.CreateUserService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;

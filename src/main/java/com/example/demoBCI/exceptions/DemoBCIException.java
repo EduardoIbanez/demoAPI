@@ -1,6 +1,5 @@
-package com.example.demoBCI.Exceptions;
+package com.example.demoBCI.exceptions;
 
-import com.fasterxml.jackson.core.JsonParseException;
 import lombok.Data;
 import org.springframework.http.HttpStatus;
 

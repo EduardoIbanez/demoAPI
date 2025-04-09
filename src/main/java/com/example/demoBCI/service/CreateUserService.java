@@ -1,25 +1,23 @@
-package com.example.demoBCI.Service;
+package com.example.demoBCI.service;
 
-import com.example.demoBCI.DTO.Request.PhoneRequestDTO;
-import com.example.demoBCI.DTO.Request.UserRequestDTO;
-import com.example.demoBCI.DTO.Response.PhoneResponseDTO;
-import com.example.demoBCI.DTO.Response.UserResponseDTO;
-import com.example.demoBCI.Entity.Phone;
-import com.example.demoBCI.Entity.User;
-import com.example.demoBCI.Exceptions.DemoBCIException;
-import com.example.demoBCI.Mapper.PhoneToPhoneDTO;
-import com.example.demoBCI.Mapper.UserDTOToUser;
-import com.example.demoBCI.Repository.PhoneRepository;
-import com.example.demoBCI.Repository.UserRepository;
-import com.example.demoBCI.Util.Validator;
+import com.example.demoBCI.dto.request.PhoneRequestDTO;
+import com.example.demoBCI.dto.request.UserRequestDTO;
+import com.example.demoBCI.dto.response.PhoneResponseDTO;
+import com.example.demoBCI.dto.response.UserResponseDTO;
+import com.example.demoBCI.entity.Phone;
+import com.example.demoBCI.entity.User;
+import com.example.demoBCI.exceptions.DemoBCIException;
+import com.example.demoBCI.mapper.PhoneToPhoneDTO;
+import com.example.demoBCI.mapper.UserDTOToUser;
+import com.example.demoBCI.repository.PhoneRepository;
+import com.example.demoBCI.repository.UserRepository;
+import com.example.demoBCI.util.Validator;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.net.http.HttpRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.IntStream;
 
 @Service
 public class CreateUserService {

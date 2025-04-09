@@ -1,6 +1,5 @@
-package com.example.demoBCI.Context;
+package com.example.demoBCI.context;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration

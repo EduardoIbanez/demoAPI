@@ -1,7 +1,7 @@
-package com.example.demoBCI.Mapper;
+package com.example.demoBCI.mapper;
 
-import com.example.demoBCI.DTO.Request.UserRequestDTO;
-import com.example.demoBCI.Entity.User;
+import com.example.demoBCI.dto.request.UserRequestDTO;
+import com.example.demoBCI.entity.User;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;

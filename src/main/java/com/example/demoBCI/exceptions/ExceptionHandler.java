@@ -1,4 +1,4 @@
-package com.example.demoBCI.Exceptions;
+package com.example.demoBCI.exceptions;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;

@@ -1,6 +1,6 @@
-package com.example.demoBCI.Repository;
+package com.example.demoBCI.repository;
 
-import com.example.demoBCI.Entity.User;
+import com.example.demoBCI.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User, String> {

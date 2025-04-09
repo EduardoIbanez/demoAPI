@@ -1,4 +1,4 @@
-package com.example.demoBCI.Entity;
+package com.example.demoBCI.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;

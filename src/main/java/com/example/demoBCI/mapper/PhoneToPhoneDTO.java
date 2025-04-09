@@ -1,7 +1,7 @@
-package com.example.demoBCI.Mapper;
+package com.example.demoBCI.mapper;
 
-import com.example.demoBCI.DTO.Response.PhoneResponseDTO;
-import com.example.demoBCI.Entity.Phone;
+import com.example.demoBCI.dto.response.PhoneResponseDTO;
+import com.example.demoBCI.entity.Phone;
 import org.springframework.stereotype.Component;
 
 @Component

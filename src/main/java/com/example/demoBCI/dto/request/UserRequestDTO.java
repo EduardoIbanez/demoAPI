@@ -1,4 +1,4 @@
-package com.example.demoBCI.DTO.Request;
+package com.example.demoBCI.dto.request;
 
 import lombok.Data;
 

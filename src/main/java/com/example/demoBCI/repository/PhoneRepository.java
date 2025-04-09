@@ -1,7 +1,6 @@
-package com.example.demoBCI.Repository;
+package com.example.demoBCI.repository;
 
-import com.example.demoBCI.Entity.Phone;
-import com.example.demoBCI.Entity.User;
+import com.example.demoBCI.entity.Phone;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
