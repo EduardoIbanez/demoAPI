@@ -1,5 +1,6 @@
 package com.example.demoBCI.service;
 
+import com.example.demoBCI.constant.ConstantDemoBCI;
 import com.example.demoBCI.dto.request.PhoneRequestDTO;
 import com.example.demoBCI.dto.request.UserRequestDTO;
 import com.example.demoBCI.dto.response.PhoneResponseDTO;
@@ -27,7 +28,7 @@ public class CreateUserService {
     private final UserDTOToUser mapperUser;
     private final PhoneToPhoneDTO mapperPhone;
 
-    public CreateUserService(UserRepository userRepository, PhoneRepository phoneRepository, UserDTOToUser mapperUser, PhoneToPhoneDTO mapperPhone, Validator validator) {
+    public CreateUserService(UserRepository userRepository, PhoneRepository phoneRepository, UserDTOToUser mapperUser, PhoneToPhoneDTO mapperPhone, Validator validator, ConstantDemoBCI constantDemoBCI) {
         this.userRepository = userRepository;
         this.phoneRepository = phoneRepository;
         this.mapperUser = mapperUser;
@@ -36,30 +37,35 @@ public class CreateUserService {
 
 
     public UserResponseDTO createUser(UserRequestDTO userRequestDTO){
-        User user = new User();
         User userPhones = new User();
         boolean emailValidator = Validator.emailValidator(userRequestDTO.getEmail());
         boolean passValidator = Validator.passValidator(userRequestDTO.getPassword());
         User existEmail = this.userRepository.findByEmail(userRequestDTO.getEmail());
 
         if(!emailValidator){
-            throw  new DemoBCIException("email invalido",HttpStatus.BAD_REQUEST);
+            throw  new DemoBCIException(ConstantDemoBCI.EMAIL_ERROR,HttpStatus.BAD_REQUEST);
         }else if(!passValidator){
-            throw  new DemoBCIException("contraseña invalida",HttpStatus.BAD_REQUEST);
+            throw  new DemoBCIException(ConstantDemoBCI.PASSWORD_ERROR,HttpStatus.BAD_REQUEST);
         }else if(Objects.nonNull(existEmail)){
-            throw  new DemoBCIException("email ya registrado",HttpStatus.INTERNAL_SERVER_ERROR);
+            throw  new DemoBCIException(ConstantDemoBCI.EMAIL_REGISTER_ERROR,HttpStatus.INTERNAL_SERVER_ERROR);
         }else{
-                user = mapperUser.map(userRequestDTO);
-                this.userRepository.save(user);
-                userPhones = this.userRepository.findByUuid(user.getUuid());
-                if(userPhones != null ){
-                    for(int i=0; i < userRequestDTO.getPhones().size(); i++){
-                        createPhone(userPhones, userRequestDTO.getPhones().get(i));
-                    }
-                }
-            }
+            userPhones = createNewUser(userRequestDTO);
+        }
 
         return generateResponse(userPhones);
+    }
+
+    private User createNewUser(UserRequestDTO userRequestDTO) {
+        User userPhones;
+        User user = mapperUser.map(userRequestDTO);
+        this.userRepository.save(user);
+        userPhones = this.userRepository.findByUuid(user.getUuid());
+        if(userPhones != null ){
+            for(int i = 0; i < userRequestDTO.getPhones().size(); i++){
+                createPhone(userPhones, userRequestDTO.getPhones().get(i));
+            }
+        }
+        return userPhones;
     }
 
     private Phone createPhone(User user, PhoneRequestDTO phones){
@@ -68,12 +74,12 @@ public class CreateUserService {
         phoneCreate.setCityCode(phones.getCitycode());
         phoneCreate.setCountryCode(phones.getContrycode());
         phoneCreate.setUuidUser(user.getUuid());
-        return phoneRepository.save(phoneCreate);
+        return this.phoneRepository.save(phoneCreate);
     }
 
     private UserResponseDTO generateResponse(User user){
-        User getUser = userRepository.findByUuid(user.getUuid());
-        List<Phone> phones  = phoneRepository.findByUuidUser(user.getUuid());
+        User getUser = this.userRepository.findByUuid(user.getUuid());
+        List<Phone> phones  = this.phoneRepository.findByUuidUser(user.getUuid());
 
         UserResponseDTO userResponse  = new UserResponseDTO();
         userResponse.setName(getUser.getName());
@@ -92,7 +98,7 @@ public class CreateUserService {
     private List<PhoneResponseDTO> converterPhones(List<Phone> phones){
         List<PhoneResponseDTO> phonesResponseDTO = new ArrayList<>();
         for (Phone phone : phones) {
-            PhoneResponseDTO phoneResponseMapper = mapperPhone.map(phone);
+            PhoneResponseDTO phoneResponseMapper = this.mapperPhone.map(phone);
             phonesResponseDTO.add(phoneResponseMapper);
         }
         return phonesResponseDTO;

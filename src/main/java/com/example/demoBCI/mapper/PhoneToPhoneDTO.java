@@ -8,10 +8,10 @@ import org.springframework.stereotype.Component;
 public class PhoneToPhoneDTO implements IMapper<Phone, PhoneResponseDTO>{
     @Override
     public PhoneResponseDTO map(Phone in) {
-        PhoneResponseDTO phones  =new PhoneResponseDTO();
-        phones.setNumber(in.getNumber());
-        phones.setCityCode(in.getCityCode());
-        phones.setCountryCode(in.getCountryCode());
-        return phones;
+        PhoneResponseDTO phoneDto  =new PhoneResponseDTO();
+        phoneDto.setNumber(in.getNumber());
+        phoneDto.setCityCode(in.getCityCode());
+        phoneDto.setCountryCode(in.getCountryCode());
+        return phoneDto;
     }
 }

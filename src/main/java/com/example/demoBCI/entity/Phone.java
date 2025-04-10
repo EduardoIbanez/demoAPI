@@ -1,11 +1,15 @@
 package com.example.demoBCI.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "Phone")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Phone {
 
     @Id
