@@ -1,6 +1,8 @@
 package com.example.demoBCI.exceptions;
 
+import com.example.demoBCI.dto.response.ErrorDTO;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
@@ -8,11 +10,10 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @ControllerAdvice
 public class ExceptionHandler extends ResponseEntityExceptionHandler {
-
-    @org.springframework.web.bind.annotation.ExceptionHandler(value = {DemoBCIException.class})
-    protected ResponseEntity<Object> handleConflict(
-            DemoBCIException ex, WebRequest request){
-        String bodyOfResponse = ex.getMessage();
-        return handleExceptionInternal(ex, bodyOfResponse,new HttpHeaders(),ex.getHttpStatus(),request);
+    @org.springframework.web.bind.annotation.ExceptionHandler(value = DemoBCIException.class)
+    protected ResponseEntity<ErrorDTO> requestHandleConflict(DemoBCIException ex){
+        ErrorDTO error = new ErrorDTO();
+        error.setMensaje(ex.getMessage());
+        return new ResponseEntity<>(error, ex.getHttpStatus());
     }
 }

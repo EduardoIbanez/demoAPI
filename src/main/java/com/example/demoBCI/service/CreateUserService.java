@@ -43,11 +43,11 @@ public class CreateUserService {
         User existEmail = this.userRepository.findByEmail(userRequestDTO.getEmail());
 
         if(!emailValidator){
-            throw  new DemoBCIException("email invalido",HttpStatus.NOT_FOUND);
+            throw  new DemoBCIException("email invalido",HttpStatus.BAD_REQUEST);
         }else if(!passValidator){
-            throw  new DemoBCIException("contraseña invalida",HttpStatus.NOT_FOUND);
+            throw  new DemoBCIException("contraseña invalida",HttpStatus.BAD_REQUEST);
         }else if(Objects.nonNull(existEmail)){
-            throw  new DemoBCIException("email ya registrado",HttpStatus.NOT_FOUND);
+            throw  new DemoBCIException("email ya registrado",HttpStatus.INTERNAL_SERVER_ERROR);
         }else{
                 user = mapperUser.map(userRequestDTO);
                 this.userRepository.save(user);
