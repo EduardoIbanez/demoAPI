@@ -56,12 +56,12 @@ public class CreateUserService {
     }
 
     private User createNewUser(UserRequestDTO userRequestDTO) {
-        User userPhones;
         User user = mapperUser.map(userRequestDTO);
         this.userRepository.save(user);
-        userPhones = this.userRepository.findByUuid(user.getUuid());
-        if(userPhones != null ){
-            for(int i = 0; i < userRequestDTO.getPhones().size(); i++){
+        User userPhones = this.userRepository.findByUuid(user.getUuid());
+
+        if(Objects.nonNull(userPhones)) {
+            for (int i = 0; i < userRequestDTO.getPhones().size(); i++) {
                 createPhone(userPhones, userRequestDTO.getPhones().get(i));
             }
         }

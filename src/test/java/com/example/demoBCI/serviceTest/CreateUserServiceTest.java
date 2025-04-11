@@ -43,23 +43,24 @@ public class CreateUserServiceTest {
     @Test
     public void createUserTestOK(){
         PhoneRequestDTO phoneRequestDto = new PhoneRequestDTO(1111111,1,1);
-        User user = new User("a","a@a.com","", LocalDateTime.now(),LocalDateTime.now(), LocalDateTime.now(),Mockito.anyString(),true);
+
+        User user = new User("a","a@a.com","", LocalDateTime.now(),LocalDateTime.now(), LocalDateTime.now(),"1a2b3c4d",true);
+        User user2 = new User("b","b@b.com","", LocalDateTime.now(),LocalDateTime.now(), LocalDateTime.now(),"5e6f7g8h",true);
+
         Phone phone = new Phone(1L,1111111,1,1,"a-b-c-d");
         Phone phone2 = new Phone(2L,333333,3,33,"j-k-l-m");
+
         List<PhoneRequestDTO> listPhonesRequest = new ArrayList<>();
         listPhonesRequest.add(phoneRequestDto);
 
         List<Phone> listPhone = new ArrayList<>();
-
         listPhone.add(phone);
         listPhone.add(phone2);
 
         UserRequestDTO userDto = new UserRequestDTO("Ever","aaa@a.com","abcdE1",listPhonesRequest);
         PhoneResponseDTO phoneDto = new PhoneResponseDTO(1111111,1,1);
 
-
-        //Mockito.when(userRepository.findByEmail("aaa@b.com")).thenReturn(user);
-        Mockito.when(userRepository.findByEmail("bbb@b.com")).thenReturn(user);
+        Mockito.when(userRepository.findByEmail("b@b.com")).thenReturn(user2);
         Mockito.when(mapperUser.map(userDto)).thenReturn(user);
         Mockito.when(userRepository.findByUuid(user.getUuid())).thenReturn(user);
         Mockito.when(mapperPhone.map(phone)).thenReturn(phoneDto);
@@ -110,4 +111,5 @@ public class CreateUserServiceTest {
         Assertions.assertEquals(ConstantDemoBCI.EMAIL_REGISTER_ERROR, ex.getMessage());
 
     }
+
 }
