@@ -4,26 +4,27 @@ CREATE DATABASE DemoBCI;
 USE DemoBCI;
 
 
-CREATE TABLE Usuarios(
+CREATE TABLE User(
 
 uuid varchar PRIMARY KEY,
-nombre varchar
-email  varchar
-password varchar
-fecha_creacion datetime
-fecha_modificacion datetime
-ultimo_login datetime
-token varchar
+nombre varchar,
+email  varchar,
+password varchar,
+created datetime,
+modified datetime,
+lastLogin datetime,
+token varchar,
 isActive boolean
 );
 
 
-CREATE TABLE Telefonos(
+CREATE TABLE Phone(
 
-id_telefono integer NOT NULL PRIMARY KEY,
-cityCode integer
-contryCode integer
-uuid_usuario varchar
-CONSTRAINT FK_Usuarios FOREIGN KEY (uuid_usuario)
-    REFERENCES Usuarios(uuid)
+idPhone integer NOT NULL PRIMARY KEY,
+number integer,
+cityCode integer,
+countryCode integer,
+uuidUser varchar
+CONSTRAINT FK_User FOREIGN KEY (uuidUser)
+    REFERENCES User(uuid)
 );
