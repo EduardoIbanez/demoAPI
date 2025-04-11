@@ -43,10 +43,9 @@ public class CreateUserServiceTest {
     @Test
     public void createUserTestOK(){
         PhoneRequestDTO phoneRequestDto = new PhoneRequestDTO(1111111,1,1);
-
-        User user = new User("a","aaa@acom","", LocalDateTime.now(),LocalDateTime.now(), LocalDateTime.now(),"",true);
-        Phone phone = new Phone(00001L,1111111,1,1,"a-b-c-d");
-        Phone phone2 = new Phone(00002L,333333,3,33,"j-k-l-m");
+        User user = new User("a","a@a.com","", LocalDateTime.now(),LocalDateTime.now(), LocalDateTime.now(),Mockito.anyString(),true);
+        Phone phone = new Phone(1L,1111111,1,1,"a-b-c-d");
+        Phone phone2 = new Phone(2L,333333,3,33,"j-k-l-m");
         List<PhoneRequestDTO> listPhonesRequest = new ArrayList<>();
         listPhonesRequest.add(phoneRequestDto);
 
@@ -59,7 +58,8 @@ public class CreateUserServiceTest {
         PhoneResponseDTO phoneDto = new PhoneResponseDTO(1111111,1,1);
 
 
-        Mockito.when(userRepository.findByEmail("aaa@acom")).thenReturn(user);
+        //Mockito.when(userRepository.findByEmail("aaa@b.com")).thenReturn(user);
+        Mockito.when(userRepository.findByEmail("bbb@b.com")).thenReturn(user);
         Mockito.when(mapperUser.map(userDto)).thenReturn(user);
         Mockito.when(userRepository.findByUuid(user.getUuid())).thenReturn(user);
         Mockito.when(mapperPhone.map(phone)).thenReturn(phoneDto);
@@ -77,7 +77,7 @@ public class CreateUserServiceTest {
 
         DemoBCIException ex = Assertions.assertThrows(DemoBCIException.class, () -> createUserService.createUser(userDto));
 
-        Assertions.assertEquals(ex.getMessage(), ConstantDemoBCI.EMAIL_ERROR);
+        Assertions.assertEquals(ConstantDemoBCI.EMAIL_ERROR, ex.getMessage());
 
     }
 
@@ -90,7 +90,7 @@ public class CreateUserServiceTest {
 
         DemoBCIException ex = Assertions.assertThrows(DemoBCIException.class, () -> createUserService.createUser(userDto));
 
-        Assertions.assertEquals(ex.getMessage(), ConstantDemoBCI.PASSWORD_ERROR);
+        Assertions.assertEquals(ConstantDemoBCI.PASSWORD_ERROR, ex.getMessage());
 
     }
 
@@ -107,7 +107,7 @@ public class CreateUserServiceTest {
 
         DemoBCIException ex = Assertions.assertThrows(DemoBCIException.class, () -> createUserService.createUser(userDto));
 
-        Assertions.assertEquals(ex.getMessage(), ConstantDemoBCI.EMAIL_REGISTER_ERROR);
+        Assertions.assertEquals(ConstantDemoBCI.EMAIL_REGISTER_ERROR, ex.getMessage());
 
     }
 }
