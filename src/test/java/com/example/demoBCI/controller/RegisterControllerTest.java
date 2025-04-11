@@ -8,6 +8,7 @@ import com.example.demoBCI.dto.response.UserResponseDTO;
 import com.example.demoBCI.service.CreateUserService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -16,12 +17,15 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+
 @DataJpaTest
 class RegisterControllerTest {
 
     @Mock
     private CreateUserService createUserService;
+
+    @InjectMocks
+    private RegisterController registerController;
     @Test
     void createUserTest() {
         PhoneRequestDTO phone = new PhoneRequestDTO(1111111,1,1);
@@ -36,6 +40,6 @@ class RegisterControllerTest {
 
         Mockito.when(createUserService.createUser(userDto)).thenReturn(userResponseDto);
 
-        Mockito.verify(createUserService).createUser(userDto);
+        Assertions.assertNotNull(registerController.createUser(userDto));
     }
 }
