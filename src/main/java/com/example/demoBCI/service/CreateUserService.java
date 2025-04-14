@@ -38,6 +38,7 @@ public class CreateUserService {
 
     public UserResponseDTO createUser(UserRequestDTO userRequestDTO){
         User userPhones = new User();
+        emptyDataValidator(userRequestDTO);
         boolean emailValidator = Validator.emailValidator(userRequestDTO.getEmail());
         boolean passValidator = Validator.passValidator(userRequestDTO.getPassword());
         User existEmail = this.userRepository.findByEmail(userRequestDTO.getEmail());
@@ -53,6 +54,16 @@ public class CreateUserService {
         }
 
         return generateResponse(userPhones);
+    }
+    
+    private  void emptyDataValidator(UserRequestDTO userRequestDTO){
+        if(userRequestDTO.getName().trim().isEmpty()){
+            throw  new DemoBCIException(ConstantDemoBCI.EMPTY_NAME_ERROR,HttpStatus.BAD_REQUEST);
+        } else if (userRequestDTO.getEmail().trim().isEmpty()) {
+            throw  new DemoBCIException(ConstantDemoBCI.EMPTY_EMAIL_ERROR,HttpStatus.BAD_REQUEST);
+        } else if (userRequestDTO.getPassword().trim().isEmpty()) {
+            throw  new DemoBCIException(ConstantDemoBCI.EMPTY_PASSWORD_ERROR,HttpStatus.BAD_REQUEST);
+        }
     }
 
     private User createNewUser(UserRequestDTO userRequestDTO) {

@@ -23,8 +23,12 @@ La url por defecto del proyecto es localhost:9090/
 La url para la creación de usuario es la siguiente: localhost:9090/create
 
 Se puede acceder a swagger una vez ejecutado el proyecto en la siguiente 
-dirección: [Swagger](localhost:9090/doc/sawagger-ui-html)
+dirección: localhost:9090/doc/sawagger-ui-html
 
-Para la revisión de la DB se accede a la siguiente url [H2 Database](localhost:9090/h2-console),
+Para la revisión de la DB se accede a la siguiente url: localhost:9090/h2-console,
 los datos de conexión, así como usuario y contraseña se encuentran en el archivo application.properties 
+
+El script de la base de datos  se encuentra ubicado en /src/main/resources
+
+El diagrama de secuencia de la solución se encuentra ubicado en /src/main/resources
 

@@ -7,7 +7,7 @@ USE DemoBCI;
 CREATE TABLE User(
 
 uuid varchar PRIMARY KEY,
-nombre varchar,
+name varchar,
 email  varchar,
 password varchar,
 created datetime,

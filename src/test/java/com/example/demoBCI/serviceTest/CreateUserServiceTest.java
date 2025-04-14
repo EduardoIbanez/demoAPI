@@ -112,4 +112,43 @@ public class CreateUserServiceTest {
 
     }
 
+    @Test()
+    public void createUserTestEmptyName(){
+        PhoneRequestDTO phoneRequestDto = new PhoneRequestDTO(1111111,1,1);
+        List<PhoneRequestDTO> listPhonesRequest = new ArrayList<>();
+        listPhonesRequest.add(phoneRequestDto);
+        UserRequestDTO userDto = new UserRequestDTO("","aaa@mail.com","abcdA1",listPhonesRequest);
+
+        DemoBCIException ex = Assertions.assertThrows(DemoBCIException.class, () -> createUserService.createUser(userDto));
+
+        Assertions.assertEquals(ConstantDemoBCI.EMPTY_NAME_ERROR, ex.getMessage());
+
+    }
+
+    @Test()
+    public void createUserTestEmptyEmail(){
+        PhoneRequestDTO phoneRequestDto = new PhoneRequestDTO(1111111,1,1);
+        List<PhoneRequestDTO> listPhonesRequest = new ArrayList<>();
+        listPhonesRequest.add(phoneRequestDto);
+        UserRequestDTO userDto = new UserRequestDTO("Juan","","abcdA1",listPhonesRequest);
+
+        DemoBCIException ex = Assertions.assertThrows(DemoBCIException.class, () -> createUserService.createUser(userDto));
+
+        Assertions.assertEquals(ConstantDemoBCI.EMPTY_EMAIL_ERROR, ex.getMessage());
+
+    }
+
+    @Test()
+    public void createUserTestEmptyPassword(){
+        PhoneRequestDTO phoneRequestDto = new PhoneRequestDTO(1111111,1,1);
+        List<PhoneRequestDTO> listPhonesRequest = new ArrayList<>();
+        listPhonesRequest.add(phoneRequestDto);
+        UserRequestDTO userDto = new UserRequestDTO("Juan","a@a.cl","",listPhonesRequest);
+
+        DemoBCIException ex = Assertions.assertThrows(DemoBCIException.class, () -> createUserService.createUser(userDto));
+
+        Assertions.assertEquals(ConstantDemoBCI.EMPTY_PASSWORD_ERROR, ex.getMessage());
+
+    }
+
 }
