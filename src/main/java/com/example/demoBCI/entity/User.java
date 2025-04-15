@@ -1,5 +1,6 @@
 package com.example.demoBCI.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -20,8 +21,11 @@ public class User implements Serializable {
 
     @Id
     public final String uuid = UUID.randomUUID().toString();
+    @Column(nullable = false)
     public String name;
+    @Column(nullable = false, unique = true)
     public String email;
+    @Column(nullable = false)
     public String password;
     public LocalDateTime created;
     public LocalDateTime modified;
