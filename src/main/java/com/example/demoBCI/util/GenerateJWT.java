@@ -15,7 +15,7 @@ import java.util.Date;
 @Component
 public class GenerateJWT {
 
-    private int expiration = 3600000;
+    final int expiration = 3600000;
 
     public SecretKey generateKey(){
 
@@ -25,9 +25,9 @@ public class GenerateJWT {
     public String generateToken(UserRequestDTO userRequestDTO, SecretKey secretKey){
         return
                 Jwts.builder()
-                .setSubject(userRequestDTO.getName())
+                .subject(userRequestDTO.getName())
                 .issuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + expiration))
+                .expiration(new Date(System.currentTimeMillis() + expiration))
                 .signWith(secretKey)
                 .compact();
     }
