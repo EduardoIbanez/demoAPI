@@ -14,7 +14,7 @@ public class Validator {
     }
 
     public static boolean passValidator(String pass){
-        Pattern pattern = Pattern.compile("^(?=\\w*\\d)(?=\\w*[A-Z])(?=\\w*[a-z])\\S{4,8}$");
+        Pattern pattern = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+.,:!])(?=\\S+$).{4,8}$");
         Matcher matcher = pattern.matcher(pass);
         return matcher.matches();
     }
