@@ -44,8 +44,8 @@ public class CreateUserServiceTest {
     public void createUserTestOK(){
         PhoneRequestDTO phoneRequestDto = new PhoneRequestDTO(1111111,1,1);
 
-        User user = new User("a","a@a.com","", LocalDateTime.now(),LocalDateTime.now(), LocalDateTime.now(),"1a2b3c4d",true);
-        User user2 = new User("b","b@b.com","", LocalDateTime.now(),LocalDateTime.now(), LocalDateTime.now(),"5e6f7g8h",true);
+        User user = new User("a","a@a.com","abcdE1.", LocalDateTime.now(),LocalDateTime.now(), LocalDateTime.now(),"1a2b3c4d",true);
+        User user2 = new User("b","b@b.com","abcdE1.", LocalDateTime.now(),LocalDateTime.now(), LocalDateTime.now(),"5e6f7g8h",true);
 
         Phone phone = new Phone(1L,1111111,1,1,"a-b-c-d");
         Phone phone2 = new Phone(2L,333333,3,33,"j-k-l-m");
@@ -57,7 +57,7 @@ public class CreateUserServiceTest {
         listPhone.add(phone);
         listPhone.add(phone2);
 
-        UserRequestDTO userDto = new UserRequestDTO("Ever","aaa@a.com","abcdE1",listPhonesRequest);
+        UserRequestDTO userDto = new UserRequestDTO("Ever","aaa@a.com","abcdE1.",listPhonesRequest);
         PhoneResponseDTO phoneDto = new PhoneResponseDTO(1111111,1,1);
 
         Mockito.when(userRepository.findByEmail("b@b.com")).thenReturn(user2);
@@ -74,7 +74,7 @@ public class CreateUserServiceTest {
         PhoneRequestDTO phoneRequestDto = new PhoneRequestDTO(1111111,1,1);
         List<PhoneRequestDTO> listPhonesRequest = new ArrayList<>();
         listPhonesRequest.add(phoneRequestDto);
-        UserRequestDTO userDto = new UserRequestDTO("Ever","aaa","abcdE1",listPhonesRequest);
+        UserRequestDTO userDto = new UserRequestDTO("Ever","aaa","abcdE1.",listPhonesRequest);
 
         DemoBCIException ex = Assertions.assertThrows(DemoBCIException.class, () -> createUserService.createUser(userDto));
 
@@ -100,9 +100,9 @@ public class CreateUserServiceTest {
         PhoneRequestDTO phoneRequestDto = new PhoneRequestDTO(1111111,1,1);
         List<PhoneRequestDTO> listPhonesRequest = new ArrayList<>();
         listPhonesRequest.add(phoneRequestDto);
-        UserRequestDTO userDto = new UserRequestDTO("Ever","aaa@mail.com","abcdA1",listPhonesRequest);
+        UserRequestDTO userDto = new UserRequestDTO("Ever","aaa@mail.com","abcdA1.",listPhonesRequest);
 
-        User user = new User("a","aaa@mail.com","", LocalDateTime.now(),LocalDateTime.now(), LocalDateTime.now(),"",true);
+        User user = new User("a","aaa@mail.com","abcdA1.", LocalDateTime.now(),LocalDateTime.now(), LocalDateTime.now(),"",true);
 
         Mockito.when(userRepository.findByEmail("aaa@mail.com")).thenReturn(user);
 
@@ -117,7 +117,7 @@ public class CreateUserServiceTest {
         PhoneRequestDTO phoneRequestDto = new PhoneRequestDTO(1111111,1,1);
         List<PhoneRequestDTO> listPhonesRequest = new ArrayList<>();
         listPhonesRequest.add(phoneRequestDto);
-        UserRequestDTO userDto = new UserRequestDTO("","aaa@mail.com","abcdA1",listPhonesRequest);
+        UserRequestDTO userDto = new UserRequestDTO("","aaa@mail.com","abcdA1.",listPhonesRequest);
 
         DemoBCIException ex = Assertions.assertThrows(DemoBCIException.class, () -> createUserService.createUser(userDto));
 
@@ -130,7 +130,7 @@ public class CreateUserServiceTest {
         PhoneRequestDTO phoneRequestDto = new PhoneRequestDTO(1111111,1,1);
         List<PhoneRequestDTO> listPhonesRequest = new ArrayList<>();
         listPhonesRequest.add(phoneRequestDto);
-        UserRequestDTO userDto = new UserRequestDTO("Juan","","abcdA1",listPhonesRequest);
+        UserRequestDTO userDto = new UserRequestDTO("Juan","","abcdA1.",listPhonesRequest);
 
         DemoBCIException ex = Assertions.assertThrows(DemoBCIException.class, () -> createUserService.createUser(userDto));
 
